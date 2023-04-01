@@ -13,5 +13,9 @@ EXPOSE 8080
 
 COPY core/target/gubee-interview.jar interview.jar
 
-# debug ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=y", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar", "--jdbc.url=jdbc:postgresql://postgres:5432/postgres", "--jdbc.password=gubee", "--jdbc.username=gubee"]
-ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar", "--jdbc.url=jdbc:postgresql://postgres:5432/postgres", "--jdbc.password=gubee", "--jdbc.username=gubee"]
+#ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar", "--jdbc.url=jdbc:postgresql://postgres:5432/postgres", "--jdbc.password=gubee", "--jdbc.username=gubee"]
+
+# debug
+ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar", "--jdbc.url=jdbc:postgresql://postgres:5432/postgres", "--jdbc.password=gubee", "--jdbc.username=gubee"]
+# debug suspended
+#ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=y", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar", "--jdbc.url=jdbc:postgresql://postgres:5432/postgres", "--jdbc.password=gubee", "--jdbc.username=gubee"]
