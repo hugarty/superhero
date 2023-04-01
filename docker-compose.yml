@@ -1,0 +1,19 @@
+
+services:
+  app:
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: ./core/src/main/docker/Dockerfile.dev
+    ports:
+     - 8080:8080
+     - 8000:8000
+  postgres:
+    build:
+      context: .
+      dockerfile: ./core/src/main/resources/db/schema/Dockerfile.dev
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432

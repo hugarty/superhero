@@ -1,0 +1,5 @@
+FROM postgres
+
+EXPOSE 5432
+COPY core/src/main/resources/db/schema/init_schema.sql /docker-entrypoint-initdb.d/
+#docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
