@@ -18,8 +18,8 @@ public class HeroController {
   private final HeroService service;
 
   @GetMapping("/{id}")
-  public ResponseEntity<String> findHeroByID(@PathVariable(value = "id") UUID id) {
+  public ResponseEntity<Hero> findHeroByID(@PathVariable(value = "id") UUID id) {
     Hero hero = service.find(id);
-    return ResponseEntity.ok().body(hero.getName());
+    return ResponseEntity.ok().body(hero);
   }
 }

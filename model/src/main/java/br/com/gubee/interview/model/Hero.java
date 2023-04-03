@@ -36,4 +36,9 @@ public class Hero {
   private Instant updatedAt;
   @Column
   private boolean enabled;
+
+  @Override
+  public String toString() {
+    return "Id: " + id + "Name:" + name;
+  }
 }

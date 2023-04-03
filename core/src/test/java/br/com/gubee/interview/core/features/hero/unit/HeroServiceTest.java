@@ -1,4 +1,4 @@
-package br.com.gubee.interview.core.features.hero;
+package br.com.gubee.interview.core.features.hero.unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.UUID;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,14 +29,14 @@ public class HeroServiceTest {
   @BeforeEach
   public void init () {
     service = new HeroServiceImpl(repository);
-    Hero hero = Hero.builder().id(heroUUID).name("Jose").build();
+    Hero hero = Hero.builder().id(heroUUID).name("test").build();
     when(repository.findById(heroUUID)).thenReturn(hero);
   }
 
   @Test
   public void givenUUID_whenFindById_thenReturnHero () {
     Hero hero = service.find(heroUUID);
-    assertEquals(hero.getName(),"Jose");
+    assertEquals("test", hero.getName());
     verify(repository, times(1)).findById(heroUUID);
   }
 }
