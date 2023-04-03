@@ -21,6 +21,8 @@ import br.com.gubee.interview.core.Application;
 @ActiveProfiles("it")
 @AutoConfigureMockMvc
 public class HeroFindByIdIT extends TestContainersPostgreInstantiation {
+	
+	public final static String URL_PREFIX = "/hero/";
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -28,7 +30,7 @@ public class HeroFindByIdIT extends TestContainersPostgreInstantiation {
   @Test
 	public void givenValidID_shouldBeOk() throws Exception {
     String heroId = "e2f066ca-5973-4581-8b2b-a062d7d76f71";
-		this.mockMvc.perform(get("/"+heroId))
+		this.mockMvc.perform(get(URL_PREFIX+heroId))
       .andDo(print())
       .andExpect(status().isOk())
 			.andExpect(jsonPath("$.name").value("jose")).andReturn();
@@ -37,7 +39,7 @@ public class HeroFindByIdIT extends TestContainersPostgreInstantiation {
   @Test
 	public void given_NOT_ValidID_shouldBe404() throws Exception {
     String heroId = "e2f066ca-0000-0000-0000-a062d7d76f71";
-		this.mockMvc.perform(get("/"+heroId))
+		this.mockMvc.perform(get(URL_PREFIX+heroId))
       .andDo(print())
       .andExpect(status().isNotFound());
 	}
