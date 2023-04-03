@@ -1,5 +1,6 @@
 package br.com.gubee.interview.core.app.hero.service.impl;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class HeroServiceImpl implements HeroService{
   @Override
   public Hero find(UUID id) {    
     return repository.findById(id);
+  }
+
+  @Override
+  public List<Hero> findAllByName(String name) {
+    return repository.findAllByName(name);
   }
   
 }

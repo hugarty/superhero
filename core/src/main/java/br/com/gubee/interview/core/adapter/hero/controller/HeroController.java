@@ -1,5 +1,6 @@
 package br.com.gubee.interview.core.adapter.hero.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,15 @@ public class HeroController {
 
   private final HeroService service;
 
-  @GetMapping("/{id}")
+  @GetMapping("id/{id}")
   public ResponseEntity<Hero> findHeroByID(@PathVariable(value = "id") UUID id) {
-    Hero hero = service.find(id);
-    return ResponseEntity.ok().body(hero);
+    return ResponseEntity.ok().body(service.find(id));
   }
+
+  @GetMapping("name/{name}")
+  public ResponseEntity<List<Hero>> findHeroByID(@PathVariable(value = "name") String name) {
+    return ResponseEntity.ok().body(service.findAllByName(name));
+  }
+
+
 }

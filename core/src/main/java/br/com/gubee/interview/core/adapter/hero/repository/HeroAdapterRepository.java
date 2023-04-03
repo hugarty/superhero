@@ -1,5 +1,6 @@
 package br.com.gubee.interview.core.adapter.hero.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,11 @@ public class HeroAdapterRepository implements HeroRepository {
   @Override
   public Hero findById(UUID id) {
     return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hero not found"));
+  }
+
+  @Override
+  public List<Hero> findAllByName(String name) {
+    return repository.findAllByNameContaining(name);
   }
   
 }

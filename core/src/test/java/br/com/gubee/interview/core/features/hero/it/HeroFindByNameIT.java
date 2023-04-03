@@ -17,24 +17,28 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import br.com.gubee.interview.core.Application;
 
-
-public class HeroFindByIdIT extends TestContainersPostgreInstantiation {
+public class HeroFindByNameIT extends TestContainersPostgreInstantiation {
 	
+  private final String URL = "name/";
+
   @Test
 	public void givenValidID_shouldBeOk() throws Exception {
-    String heroId = "e2f066ca-5973-4581-8b2b-a062d7d76f71";
-		this.mockMvc.perform(get(heroUrl("id/"+heroId)))
+    String heroName = "jose";
+		this.mockMvc.perform(get(heroUrl(URL+heroName)))
       .andDo(print())
       .andExpect(status().isOk())
-			.andExpect(jsonPath("$.name").value("jose")).andReturn();
+			.andExpect(jsonPath("$[0].name").value("jose"))
+      .andExpect(jsonPath("$[1].name").value("jose carlos"));
 	}
 
   @Test
 	public void given_NOT_ValidID_shouldBe404() throws Exception {
-    String heroId = "e2f066ca-0000-0000-0000-a062d7d76f71";
-		this.mockMvc.perform(get(heroUrl("id/"+heroId)))
+    String heroName = "pedro";
+		this.mockMvc.perform(get(heroUrl(URL+heroName)))
       .andDo(print())
-      .andExpect(status().isNotFound());
+      .andExpect(status().isOk())
+			.andExpect(jsonPath("$").isEmpty());
 	}
 
 }
+
