@@ -11,8 +11,8 @@ import br.com.gubee.interview.core.app.hero.repository.HeroRepository;
 import br.com.gubee.interview.model.Hero;
 import lombok.AllArgsConstructor;
 
-@Component
 @AllArgsConstructor
+@Component
 public class HeroAdapterRepository implements HeroRepository {
 
   private final HeroCrudRepository repository;
@@ -27,4 +27,14 @@ public class HeroAdapterRepository implements HeroRepository {
     return repository.findAllByNameContaining(name);
   }
   
+  @Override
+  public void deleteById(UUID id) {
+    Hero hero = findById(id);
+    repository.delete(hero);
+  }
+
+  @Override
+  public Hero save(Hero hero) {
+    return repository.save(hero);
+  }
 }

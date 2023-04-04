@@ -7,11 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.com.gubee.interview.enumerator.Race;
@@ -19,14 +18,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Hero {
   @Id
+  @Column(name="id", updatable = false)
   private UUID id;
   @Column
   private String name;
@@ -48,8 +50,29 @@ public class Hero {
   @Column
   private boolean enabled;
 
+  public void prepareEntityToSave () {
+    Instant now = Instant.now();
+    UUID randomUUID = UUID.randomUUID();
+    this.id = randomUUID;
+    this.updatedAt = now;
+    this.createdAt = now;
+    this.powerStatsId = randomUUID;
+    this.powerStats.setId(randomUUID);
+    this.powerStats.setUpdatedAt(now);
+    this.powerStats.setCreatedAt(now);
+  }
+
+  public void updateWith(Hero newHero) {
+    Instant now = Instant.now();
+    this.name = newHero.name;
+    this.race = newHero.race;
+    this.updatedAt = now;
+    this.powerStats.updateWith(newHero.powerStats, now);
+  }
+
   @Override
   public String toString() {
     return "Id: " + id + "Name:" + name;
   }
+
 }

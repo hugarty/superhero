@@ -10,5 +10,11 @@ public interface HeroService {
   public Hero find(UUID id);
 
   public List<Hero> findAllByName(String name);
+
+  public void delete(UUID id);
+
+  public Hero create(Hero hero);
+
+  public Hero update(UUID id, Hero hero);
   
 }

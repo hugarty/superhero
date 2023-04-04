@@ -10,4 +10,8 @@ public interface HeroRepository {
   Hero findById(UUID id);
 
   List<Hero> findAllByName(String name);
+
+  void deleteById(UUID id);
+
+  Hero save(Hero hero);
 }

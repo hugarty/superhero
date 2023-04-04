@@ -61,6 +61,11 @@
       <version>3.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${org.mapstruct.version}</version>
+    </dependency>
     <!-- Test only -->
     <dependency>
       <groupId>org.mockito</groupId>
