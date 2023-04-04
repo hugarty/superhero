@@ -32,8 +32,8 @@ public class HeroController {
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HeroDTO> createHero(@Validated @RequestBody HeroDTO dto) {
     Hero hero = HeroMapper.INSTANCE.heroDtoToHero(dto);
-    Hero saved = service.create(hero);
-    return ResponseEntity.status(HttpStatus.CREATED).body(HeroMapper.INSTANCE.heroToHeroDTO(saved));
+    HeroDTO resultDTO = HeroMapper.INSTANCE.heroToHeroDTO(service.create(hero));
+    return ResponseEntity.status(HttpStatus.CREATED).body(resultDTO);
   }
 
   @GetMapping("id/{id}")
