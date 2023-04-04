@@ -67,6 +67,7 @@ public class Hero implements Serializable {
     Instant now = Instant.now();
     this.name = newHero.name;
     this.race = newHero.race;
+    this.enabled = newHero.isEnabled();
     this.updatedAt = now;
     this.powerStats.updateWith(newHero.powerStats, now);
   }

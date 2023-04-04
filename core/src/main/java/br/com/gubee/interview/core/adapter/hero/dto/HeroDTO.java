@@ -10,13 +10,9 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.gubee.interview.enumerator.Race;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
-@Builder
+@Data
 public class HeroDTO {
   private UUID id;
   @NotBlank
@@ -35,7 +31,8 @@ public class HeroDTO {
   private Short intelligence;
   private Instant createdAt;
   private Instant updatedAt;
-
+  private Boolean enabled = true;
+  
   @Override
   public String toString() {
     return "Id: " + id + "Name:" + name;
