@@ -1,5 +1,6 @@
 package br.com.gubee.interview.model;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class PowerStats {
+public class PowerStats implements Serializable {
   @Id
   @Column(name="id", updatable = false)
   private UUID id;

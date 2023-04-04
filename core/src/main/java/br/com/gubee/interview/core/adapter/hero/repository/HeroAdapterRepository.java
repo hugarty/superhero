@@ -3,6 +3,7 @@ package br.com.gubee.interview.core.adapter.hero.repository;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,6 +19,7 @@ public class HeroAdapterRepository implements HeroRepository {
   private final HeroCrudRepository repository;
 
   @Override
+  @Cacheable(value = "heroCache")
   public Hero findById(UUID id) {
     return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hero not found"));
   }

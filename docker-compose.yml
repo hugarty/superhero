@@ -4,6 +4,7 @@ services:
     restart: on-failure
     depends_on:
       - postgres
+      - redis
     build:
       context: .
       dockerfile: ./core/src/main/docker/Dockerfile.dev
@@ -11,6 +12,7 @@ services:
     restart: on-failure
     depends_on:
       - postgres
+      - redis
     build:
       context: .
       dockerfile: ./core/src/main/docker/Dockerfile.dev    
@@ -33,3 +35,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:80
+  redis:
+    image: 'redis'
+
