@@ -1,5 +1,19 @@
-# Teste Programador Backend 
-Teste destinado aos candidatos a vaga de Programador Backend. 
+# Projeto feito em 4 dias para uma entrevista
+Software é uma API Rest CRUD, utilizando arquitetura Hexagonal. 
+
+Contém as seguintes tecnologias:
+
+ - Spring Boot
+ - Docker e Docker compose para subir os vários containers da aplicação, responsável por reiniciar os containers caso algum tenha alguma falha.
+ - Nginx como loadbalancer Round-robin, que envia as requisições para os containers de applicação.
+ - PostgreSQL para armazenamento de dados.
+ - Redis para armazenamento de Cache Distribuído.
+ - Sistema de cache utilizando Redis e Spring Cache.
+ - Testes unitário utilizando Mockito.
+ - Testes de integração com Testcontainers - Para cada teste de integração um servidor PostgreSQL e Redis é iniciado, o schema é definido e valores padrões são inseridos.
+
+--------
+# Teste
 ## Descrição
 Um cliente chamado Bruce Wayne nos contratou para fazer um sistema com o objetivo de catalogar os super-heróis existentes.
 </br>
