@@ -1,0 +1,23 @@
+{
+  "configurations": [
+
+    {
+      "type": "java",
+      "name": "Remote (Attach)",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": 8000,
+      "projectName": "interview-core",
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<interview-core>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "br.com.gubee.interview.core.Application",
+      "projectName": "interview-core",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

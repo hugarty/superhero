@@ -1,0 +1,15 @@
+FROM openjdk:17.0.1-jdk-slim
+
+LABEL maintainer="GuBee"
+LABEL version="1.0"
+
+EXPOSE 8080
+
+COPY core/target/gubee-interview.jar interview.jar
+
+#ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-Dspring.profiles.active=dev", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar"]
+
+# debug
+ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-Dspring.profiles.active=dev", "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar"]
+# debug suspended yes
+#ENTRYPOINT [ "java" , "-Xms128m",  "-Xmx400m", "-Dspring.profiles.active=dev", "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=y", "-jar", "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", "interview.jar"]

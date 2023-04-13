@@ -1,15 +1,19 @@
 package br.com.gubee.interview.core.configuration;
 
-import com.zaxxer.hikari.HikariDataSource;
+import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionManager;
 
-import javax.sql.DataSource;
-import java.util.concurrent.TimeUnit;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class JdbcConfiguration {
@@ -28,9 +32,7 @@ public class JdbcConfiguration {
 
     @Bean
     public DataSource dataSource() {
-
         HikariDataSource dataSource = new HikariDataSource();
-
         dataSource.setDriverClassName(org.postgresql.Driver.class.getName());
         dataSource.setJdbcUrl(jdbcUrl);
         dataSource.setUsername(username);
@@ -50,7 +52,11 @@ public class JdbcConfiguration {
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
     }
-
+    
+    @Bean
+    public TransactionManager transactionManager () {
+        return new JpaTransactionManager();
+    }
     /**
      * Identifies how many connections can be opened based on Postgres recommended formula.
      *

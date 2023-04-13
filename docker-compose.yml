@@ -1,0 +1,40 @@
+
+services:
+  app1:
+    restart: on-failure
+    depends_on:
+      - postgres
+      - redis
+    build:
+      context: .
+      dockerfile: ./core/src/main/docker/Dockerfile.dev
+  app2:
+    restart: on-failure
+    depends_on:
+      - postgres
+      - redis
+    build:
+      context: .
+      dockerfile: ./core/src/main/docker/Dockerfile.dev    
+  postgres:
+    build:
+      context: .
+      dockerfile: ./core/src/main/resources/db/schema/Dockerfile.dev
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+  nginx:
+    depends_on:
+      - app1
+      - app2
+      - postgres
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+  redis:
+    image: 'redis'
+
